@@ -1,0 +1,21 @@
+{
+  "name": "mxdb-api",
+  "description": "GraphQL Gateway to access different features of MXDB.",
+  "license": "MPL-2.0",
+  "repository": "https://github.com/phated/mxdb-api",
+  "scripts": {
+    "start": "node -r esm src/index.js",
+    "deploy": "now --docker --public"
+  },
+  "dependencies": {
+    "apollo-link-http": "^1.5.4",
+    "apollo-server": "^2.0.6",
+    "esm": "^3.0.61",
+    "graphql": "^0.13.2",
+    "graphql-tools": "^4.0.3",
+    "node-fetch": "^2.1.2"
+  },
+  "devDependencies": {
+    "now": "^11.5.0"
+  }
+}
