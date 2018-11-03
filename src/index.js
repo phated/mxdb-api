@@ -18,6 +18,16 @@ async function getRemoteSchema(uri, headers) {
 };
 
 async function createSchema() {
+  async function publicDecksResolver(root, args, context, info) {
+    const response = await fetch(`https://metax.toyboat.net/netdecker.php?json=true`);
+    if (response.ok) {
+      const decks = await response.json();
+      return decks;
+    } else {
+      return null;
+    }
+  }
+
   async function deckResolver(root, args, context, info) {
     const response = await fetch(`https://metax.toyboat.net/decodeDeck.php?output=metaxdb&hash=${args.hash}`);
     if (response.ok) {
@@ -45,6 +55,31 @@ async function createSchema() {
     return card.quantity || 0;
   }
 
+  function authorResolver(deck, args, context, info) {
+    return deck.author || "";
+  }
+
+  function nameResolver(deck, args, context, info) {
+    return deck.name || "";
+  }
+
+  function dateResolver(deck, args, context, info) {
+    if (deck.date) {
+      return new Date(deck.date);
+    } else {
+      // TODO: Not sure I like this
+      return new Date();
+    }
+  }
+
+  function hashResolver(deck, args, context, info) {
+    return deck.hash || "";
+  }
+
+  function sourceResolver(deck, args, context, info) {
+    return deck.source || "";
+  }
+
   const graphcoolSchema = await getRemoteSchema(
     "https://api.graph.cool/simple/v1/metaxdb"
   );
@@ -55,8 +90,17 @@ async function createSchema() {
       quantity: Int!
     }
 
+    type PublicDeck {
+      author: String!
+      name: String!
+      date: DateTime!
+      hash: String!
+      source: String!
+    }
+
     type Query {
       deck(hash: String!): [CardInDeck!]!
+      publicDecks: [PublicDeck]!
     }
   `;
 
@@ -65,8 +109,16 @@ async function createSchema() {
       card: cardResolver,
       quantity: quantityResolver
     },
+    PublicDeck: {
+      author: authorResolver,
+      name: nameResolver,
+      date: dateResolver,
+      hash: hashResolver,
+      source: sourceResolver,
+    },
     Query: {
       deck: deckResolver,
+      publicDecks: publicDecksResolver,
     },
   };
 

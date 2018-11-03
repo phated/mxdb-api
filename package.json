@@ -5,7 +5,7 @@
   "repository": "https://github.com/phated/mxdb-api",
   "scripts": {
     "start": "node -r esm src/index.js",
-    "deploy": "now --docker --public"
+    "deploy": "now --docker --public && now alias"
   },
   "dependencies": {
     "apollo-link-http": "^1.5.4",
@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "now": "^11.5.0"
+  },
+  "now": {
+    "alias": "graphql.metaxdb.com"
   }
 }
