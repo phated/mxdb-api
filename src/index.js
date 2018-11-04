@@ -24,17 +24,18 @@ async function createSchema() {
       const decks = await response.json();
       return decks;
     } else {
-      return null;
+      return [];
     }
   }
 
   async function deckResolver(root, args, context, info) {
+    // console.log(arguments);
     const response = await fetch(`https://metax.toyboat.net/decodeDeck.php?output=metaxdb&hash=${args.hash}`);
     if (response.ok) {
       const cards = await response.json();
       return Object.keys(cards).map(uid => ({ uid: uid, quantity: cards[uid] }));
     } else {
-      return null;
+      return [];
     }
   }
 
@@ -49,6 +50,10 @@ async function createSchema() {
       context,
       info,
     });
+  }
+
+  function uidResolver(card, args, context, info) {
+    return card.uid;
   }
 
   function quantityResolver(card, args, context, info) {
@@ -86,6 +91,7 @@ async function createSchema() {
 
   const typeDefs = `
     type CardInDeck {
+      id: ID!
       card: Card!
       quantity: Int!
     }
@@ -96,16 +102,18 @@ async function createSchema() {
       date: DateTime!
       hash: String!
       source: String!
+      deck: [CardInDeck]!
     }
 
     type Query {
-      deck(hash: String!): [CardInDeck!]!
+      deck(hash: String!): [CardInDeck]!
       publicDecks: [PublicDeck]!
     }
   `;
 
   const resolvers = {
     CardInDeck: {
+      id: uidResolver,
       card: cardResolver,
       quantity: quantityResolver
     },
@@ -115,6 +123,7 @@ async function createSchema() {
       date: dateResolver,
       hash: hashResolver,
       source: sourceResolver,
+      deck: (publicDeck, args, context, info) => deckResolver(undefined, publicDeck, context, info),
     },
     Query: {
       deck: deckResolver,
