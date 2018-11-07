@@ -97,6 +97,7 @@ async function createSchema() {
     }
 
     type PublicDeck {
+      id: ID!
       author: String!
       name: String!
       date: DateTime!
