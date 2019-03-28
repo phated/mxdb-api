@@ -59,3 +59,16 @@ typings/
 
 # next.js build output
 .next
+
+# pesy
+npm-debug.log
+.merlin
+yarn-error.log
+node_modules
+node_modules/
+_build
+_release
+_esy/
+rudolph.install
+.DS_Store
+*.install

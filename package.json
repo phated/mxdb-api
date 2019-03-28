@@ -1,5 +1,5 @@
 {
-  "name": "mxdb-api",
+  "name": "mxdb",
   "description": "GraphQL Gateway to access different features of MXDB.",
   "license": "MPL-2.0",
   "repository": "https://github.com/phated/mxdb-api",
@@ -7,16 +7,48 @@
     "start": "node -r esm src/index.js",
     "deploy": "now --docker --public && now alias"
   },
+  "esy": {
+    "build": "pesy",
+    "release": {
+      "releasedBinaries": [
+        "mxdb-api.exe"
+      ]
+    }
+  },
+  "buildDirs": {
+    "server": {
+      "require": [
+        "digestif.c",
+        "graphql-cohttp",
+        "graphql-lwt",
+        "cohttp-lwt-unix",
+        "console.lib"
+      ],
+      "main": "RunServer",
+      "name": "mxdb-api.exe"
+    }
+  },
   "dependencies": {
-    "apollo-link-http": "^1.5.4",
-    "apollo-server": "^2.0.6",
-    "esm": "^3.0.61",
-    "graphql": "^0.13.2",
-    "graphql-tools": "^4.0.3",
-    "node-fetch": "^2.1.2"
+    "@esy-ocaml/reason": "*",
+    "@opam/cohttp-lwt": "2.0.0",
+    "@opam/cohttp-lwt-unix": "2.0.0",
+    "@opam/digestif": "0.7.1",
+    "@opam/dune": "*",
+    "@opam/graphql": "0.9.0",
+    "@opam/graphql-cohttp": "0.12.0",
+    "@opam/graphql-lwt": "0.9.0",
+    "@opam/yojson": "1.7.0",
+    "@reason-native/console": "^0.1.0",
+    "ocaml": "~4.6.0",
+    "pesy": "*",
+    "refmterr": "*"
   },
   "devDependencies": {
+    "@esy-ocaml/merlin": "*",
     "now": "^11.5.0"
+  },
+  "resolutions": {
+    "@opam/graphql-cohttp": "andreas/ocaml-graphql-server:graphql-cohttp.opam#87b9b24"
   },
   "now": {
     "alias": "graphql.metaxdb.com"
