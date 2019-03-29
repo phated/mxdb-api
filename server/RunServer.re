@@ -1,6 +1,6 @@
 open Graphql_lwt;
 
-let schema = MxdbSchema.make();
+let schema = Mxdb.Card.schema();
 
 module Graphql_cohttp_lwt =
   Graphql_cohttp.Make(Schema, Cohttp_lwt_unix.IO, Cohttp_lwt.Body);

@@ -16,8 +16,17 @@
     }
   },
   "buildDirs": {
+    "library": {
+      "require": [
+        "graphql-lwt",
+        "console.lib"
+      ],
+      "name": "mxdb.lib",
+      "namespace": "Mxdb"
+    },
     "server": {
       "require": [
+        "mxdb.lib",
         "digestif.c",
         "graphql-cohttp",
         "graphql-lwt",

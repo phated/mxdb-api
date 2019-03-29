@@ -7,5 +7,5 @@
    (name RunServer)  ;  From package.json main field
    ; The name of the executable (runnable via esy x mxdb-api.exe) 
    (public_name mxdb-api.exe)  ;  From package.json name field
-   (libraries  digestif.c graphql-cohttp graphql-lwt cohttp-lwt-unix console.lib ) ;  From package.json require field (array of strings)
+   (libraries  mxdb.lib digestif.c graphql-cohttp graphql-lwt cohttp-lwt-unix console.lib ) ;  From package.json require field (array of strings)
 )
