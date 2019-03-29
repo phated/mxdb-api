@@ -33,7 +33,7 @@
     "@opam/cohttp-lwt": "2.0.0",
     "@opam/cohttp-lwt-unix": "2.0.0",
     "@opam/digestif": "0.7.1",
-    "@opam/dune": "*",
+    "@opam/dune": "1.6.0",
     "@opam/graphql": "0.9.0",
     "@opam/graphql-cohttp": "0.12.0",
     "@opam/graphql-lwt": "0.9.0",
@@ -44,7 +44,7 @@
     "refmterr": "*"
   },
   "devDependencies": {
-    "@esy-ocaml/merlin": "*",
+    "@opam/merlin": "*",
     "now": "^11.5.0"
   },
   "resolutions": {
