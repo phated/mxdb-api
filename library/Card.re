@@ -10,8 +10,14 @@ let card: Schema.abstract_typ(unit, t) =
       [
         UID.Schema.abstract_field(),
         Rarity.Schema.abstract_field(),
+        Number.Schema.abstract_field(),
         Expansion.Schema.abstract_field(),
+        Type.Schema.abstract_field(),
         Title.Schema.abstract_field(),
+        MP.Schema.abstract_field(),
+        Effect.Schema.abstract_field(),
+        Image.Schema.abstract_field(),
+        Preview.Schema.abstract_field(),
       ]
     )
   );
