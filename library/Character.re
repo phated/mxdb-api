@@ -1,7 +1,15 @@
-module Stats = {
-  type t = list(Stat.t);
+module CharacterStats = {
+  type stat = {
+    type_: Stat.Type.t,
+    rank: Stat.Rank.t,
+    icon: Stat.Icon.t,
+  };
 
-  let dummy = [Stat.dummy];
+  type t = list(stat);
+
+  let dummy = [
+    {type_: Strength, rank: 1, icon: "/path/to/strength-icon.png"},
+  ];
 
   module Schema = {
     open Graphql_lwt.Schema;
@@ -10,7 +18,23 @@ module Stats = {
 
     let doc = "Stats of a Character card.";
 
-    let typ = () => non_null(list(Stat.Schema.typ()));
+    let typ = () =>
+      non_null(
+        list(
+          non_null(
+            obj(
+              "CharacterStat",
+              ~doc="One stat of a Character card.",
+              ~fields=_typ =>
+              [
+                Stat.Type.Schema.field((ctx, stat) => stat.type_),
+                Stat.Rank.Schema.field((ctx, stat) => stat.rank),
+                Stat.Icon.Schema.field((ctx, stat) => stat.icon),
+              ]
+            ),
+          ),
+        ),
+      );
 
     let args = () => Arg.[];
 
@@ -29,7 +53,7 @@ type t = {
   subtitle: Subtitle.t,
   trait: Trait.t,
   mp: MP.t,
-  stats: Stats.t,
+  stats: CharacterStats.t,
   effect: Effect.t,
   image: Image.t,
   preview: Preview.t,
@@ -45,7 +69,7 @@ let dummy = {
   subtitle: "Butler",
   trait: Hero,
   mp: 1,
-  stats: Stats.dummy,
+  stats: CharacterStats.dummy,
   effect: {
     symbol: Push,
     text: Some("Search for character"),
@@ -80,7 +104,7 @@ module Schema = {
         Subtitle.Schema.field((ctx, card) => card.subtitle),
         Trait.Schema.field((ctx, card) => card.trait),
         MP.Schema.field((ctx, card) => card.mp),
-        Stats.Schema.field((ctx, card) => card.stats),
+        CharacterStats.Schema.field((ctx, card) => card.stats),
         Effect.Schema.field((ctx, card) => card.effect),
         Image.Schema.field((ctx, card) => card.image),
         Preview.Schema.field((ctx, card) => card.preview),

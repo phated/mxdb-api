@@ -68,26 +68,3 @@ module Icon = {
       field(fieldName, ~doc, ~typ=typ(), ~args=args(), ~resolve);
   };
 };
-
-type t = {
-  type_: Type.t,
-  rank: Rank.t,
-  icon: Icon.t,
-};
-
-let dummy = {type_: Strength, rank: 1, icon: "/path/to/strength-icon.png"};
-
-module Schema = {
-  open Graphql_lwt.Schema;
-
-  let typ = () =>
-    non_null(
-      obj("Stat", ~doc="One stat of a Character card.", ~fields=_typ =>
-        [
-          Type.Schema.field((ctx, stat) => stat.type_),
-          Rank.Schema.field((ctx, stat) => stat.rank),
-          Icon.Schema.field((ctx, stat) => stat.icon),
-        ]
-      ),
-    );
-};

@@ -39,7 +39,7 @@ module Schema = {
 
   let fieldName = "Event";
 
-  let doc = "An Event Card,";
+  let doc = "An Event Card.";
 
   let typ = () =>
     obj(fieldName, ~doc, ~fields=_typ =>

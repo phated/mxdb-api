@@ -24,6 +24,7 @@ let card: Schema.abstract_typ(unit, t) =
 
 let characterAsCard = Schema.add_type(card, Character.Schema.typ());
 let eventAsCard = Schema.add_type(card, Event.Schema.typ());
+let battleAsCard = Schema.add_type(card, Battle.Schema.typ());
 
 let schema = () =>
   Schema.(
@@ -34,7 +35,11 @@ let schema = () =>
         ~typ=non_null(list(non_null(card))),
         ~args=Arg.[],
         ~resolve=(_info, _src) =>
-        [characterAsCard(Character.dummy), eventAsCard(Event.dummy)]
+        [
+          characterAsCard(Character.dummy),
+          eventAsCard(Event.dummy),
+          battleAsCard(Battle.dummy),
+        ]
       ),
     ])
   );
