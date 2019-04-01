@@ -13,11 +13,15 @@
       "releasedBinaries": [
         "mxdb-api.exe"
       ]
+    },
+    "sandboxEnv": {
+      "PATH": "/Users/phated/brew/bin:$PATH"
     }
   },
   "buildDirs": {
     "library": {
       "require": [
+        "ezpostgresql",
         "graphql-lwt",
         "console.lib"
       ],
@@ -48,6 +52,7 @@
     "@opam/graphql-lwt": "0.9.0",
     "@opam/yojson": "1.7.0",
     "@reason-native/console": "^0.1.0",
+    "ezpostgresql": "*",
     "ocaml": "~4.6.0",
     "pesy": "*",
     "refmterr": "*"
@@ -57,7 +62,8 @@
     "now": "^11.5.0"
   },
   "resolutions": {
-    "@opam/graphql-cohttp": "andreas/ocaml-graphql-server:graphql-cohttp.opam#87b9b24"
+    "@opam/graphql-cohttp": "andreas/ocaml-graphql-server:graphql-cohttp.opam#87b9b24",
+    "ezpostgresql": "bobbypriambodo/ezpostgresql:ezpostgresql.opam#61bb851"
   },
   "now": {
     "alias": "graphql.metaxdb.com"

@@ -1,5 +1,5 @@
 {
-  "checksum": "0cf1316ab16e5db75fb68a3cbdb5225d",
+  "checksum": "e86bc785163afa82d046455da800a098",
   "root": "mxdb@link-dev:./package.json",
   "node": {
     "refmterr@3.1.10@d41d8cd9": {
@@ -73,7 +73,9 @@
       "overrides": [],
       "dependencies": [
         "refmterr@3.1.10@d41d8cd9", "pesy@0.4.1@d41d8cd9",
-        "ocaml@4.6.10@d41d8cd9", "@reason-native/console@0.1.0@d41d8cd9",
+        "ocaml@4.6.10@d41d8cd9",
+        "ezpostgresql@github:bobbypriambodo/ezpostgresql:ezpostgresql.opam#61bb851@d41d8cd9",
+        "@reason-native/console@0.1.0@d41d8cd9",
         "@opam/yojson@opam:1.7.0@2d92307e",
         "@opam/graphql-lwt@opam:0.9.0@5b1d17a4",
         "@opam/graphql-cohttp@github:andreas/ocaml-graphql-server:graphql-cohttp.opam#87b9b24@d41d8cd9",
@@ -86,6 +88,31 @@
       ],
       "devDependencies": [
         "now@11.5.2@d41d8cd9", "@opam/merlin@opam:3.2.2@829ee6dd"
+      ]
+    },
+    "ezpostgresql@github:bobbypriambodo/ezpostgresql:ezpostgresql.opam#61bb851@d41d8cd9": {
+      "id":
+        "ezpostgresql@github:bobbypriambodo/ezpostgresql:ezpostgresql.opam#61bb851@d41d8cd9",
+      "name": "ezpostgresql",
+      "version":
+        "github:bobbypriambodo/ezpostgresql:ezpostgresql.opam#61bb851",
+      "source": {
+        "type": "install",
+        "source": [
+          "github:bobbypriambodo/ezpostgresql:ezpostgresql.opam#61bb851"
+        ]
+      },
+      "overrides": [],
+      "dependencies": [
+        "@opam/result@opam:1.3@bee8bf2e",
+        "@opam/postgresql@opam:4.4.2@8034289b",
+        "@opam/lwt@opam:4.2.0@3edaca61", "@opam/dune@opam:1.6.0@6fe4492e",
+        "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [
+        "@opam/result@opam:1.3@bee8bf2e",
+        "@opam/postgresql@opam:4.4.2@8034289b",
+        "@opam/lwt@opam:4.2.0@3edaca61"
       ]
     },
     "@reason-native/console@0.1.0@d41d8cd9": {
@@ -587,6 +614,34 @@
         "@esy-ocaml/substs@0.0.1@d41d8cd9"
       ],
       "devDependencies": [ "ocaml@4.6.10@d41d8cd9" ]
+    },
+    "@opam/postgresql@opam:4.4.2@8034289b": {
+      "id": "@opam/postgresql@opam:4.4.2@8034289b",
+      "name": "@opam/postgresql",
+      "version": "opam:4.4.2",
+      "source": {
+        "type": "install",
+        "source": [
+          "archive:https://opam.ocaml.org/cache/md5/a3/a33ddf73b99ea63a916134e5f0debbb4#md5:a33ddf73b99ea63a916134e5f0debbb4",
+          "archive:https://github.com/mmottl/postgresql-ocaml/releases/download/4.4.2/postgresql-4.4.2.tbz#md5:a33ddf73b99ea63a916134e5f0debbb4"
+        ],
+        "opam": {
+          "name": "postgresql",
+          "version": "4.4.2",
+          "path": "esy.lock/opam/postgresql.4.4.2"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "ocaml@4.6.10@d41d8cd9", "@opam/stdio@opam:v0.12.0@1d18adcb",
+        "@opam/dune@opam:1.6.0@6fe4492e",
+        "@opam/base-bytes@opam:base@19d0c2ff",
+        "@opam/base@opam:v0.12.0@bd6e6655",
+        "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [
+        "ocaml@4.6.10@d41d8cd9", "@opam/base-bytes@opam:base@19d0c2ff"
+      ]
     },
     "@opam/parsexp@opam:v0.12.0@66f48735": {
       "id": "@opam/parsexp@opam:v0.12.0@66f48735",
