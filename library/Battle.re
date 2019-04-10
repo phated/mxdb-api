@@ -139,17 +139,21 @@ module Schema = {
   let typ = () =>
     obj(fieldName, ~doc, ~fields=_typ =>
       [
-        UID.Schema.field((ctx, card) => card.uid),
-        Rarity.Schema.field((ctx, card) => card.rarity),
-        Number.Schema.field((ctx, card) => card.number),
-        Expansion.Schema.field((ctx, card) => card.expansion),
-        Type.Schema.field((ctx, card) => card.type_),
-        Title.Schema.field((ctx, card) => card.title),
-        MP.Schema.field((ctx, card) => card.mp),
-        Effect.Schema.field((ctx, card) => card.effect),
-        BattleStat.Schema.field((ctx, card) => card.stat),
-        Image.Schema.field((ctx, card) => card.image),
-        Preview.Schema.field((ctx, card) => card.preview),
+        UID.Schema.field(({ctx}: resolve_info(Ctx.t), (id, _type)) =>
+          Dataloader_lwt.load(ctx.loaders.uid, id)
+        ),
+        Rarity.Schema.field(({ctx}: resolve_info(Ctx.t), (id, _type)) =>
+          Dataloader_lwt.load(ctx.loaders.rarity, id)
+        ),
+        // Number.Schema.field((ctx, card) => card.number),
+        // Expansion.Schema.field((ctx, card) => card.expansion),
+        Type.Schema.field((info, (_id, type_)) => type_),
+        // Title.Schema.field((ctx, card) => card.title),
+        // MP.Schema.field((ctx, card) => card.mp),
+        // Effect.Schema.field((ctx, card) => card.effect),
+        // BattleStat.Schema.field((ctx, card) => card.stat),
+        // Image.Schema.field((ctx, card) => card.image),
+        // Preview.Schema.field((ctx, card) => card.preview),
       ]
     );
 };

@@ -7,5 +7,5 @@
    (name Mxdb)
    ; Other libraries list this name in their package.json 'require' field to use this library.
    (public_name mxdb.lib)
-   (libraries  ezpostgresql graphql-lwt console.lib )
+   (libraries  caqti caqti-lwt caqti-driver-postgresql dataloader dataloader-lwt graphql-lwt console.lib )
 )

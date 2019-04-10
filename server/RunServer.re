@@ -18,7 +18,8 @@ let on_exn =
     )
   | exn => Logs.err(m => m("Unhandled exception: %a", Fmt.exn, exn));
 
-let callback = Graphql_cohttp_lwt.make_callback(_req => (), schema);
+let callback =
+  Graphql_cohttp_lwt.make_callback(_req => Mxdb.Ctx.make(), schema);
 let server = Cohttp_lwt_unix.Server.make_response_action(~callback, ());
 let mode = `TCP(`Port(8080));
 let () =

@@ -3,6 +3,15 @@ type t =
   | Event
   | Battle;
 
+let fromString = str =>
+  switch (str) {
+  | "CHARACTER" => Character
+  | "EVENT" => Event
+  | "BATTLE" => Battle
+  // TODO: don't fail here, use Result?
+  | _ => failwith("invalid card type")
+  };
+
 module Schema = {
   open Graphql_lwt.Schema;
 
